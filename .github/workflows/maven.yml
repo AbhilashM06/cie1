@@ -32,6 +32,9 @@ jobs:
         run: mvn --batch-mode clean verify
 
   # Job 2: Docker Hub Publish
+
+ 
+
   docker-publish:
     name: Docker Build and Publish
     needs: maven-test
@@ -46,19 +49,21 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Check Docker Hub username
+      - name: Check Docker Hub Username and Token
         env:
-          DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          if [ -z "$DOCKER_USER" ]; then
+          if [ -z "$DOCKERHUB_USERNAME" ]; then
             echo "DOCKERHUB_USERNAME secret is missing"
             exit 1
           fi
-          if [ -z "$DOCKER_TOKEN" ]; then
+
+          if [ -z "$DOCKERHUB_TOKEN" ]; then
             echo "DOCKERHUB_TOKEN secret is missing"
             exit 1
           fi
+
           echo "Docker Hub secrets are configured."
 
       - name: Login to Docker Hub
