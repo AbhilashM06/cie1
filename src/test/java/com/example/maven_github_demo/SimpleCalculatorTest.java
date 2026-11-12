@@ -8,7 +8,7 @@ public class SimpleCalculatorTest {
 
     @Test
     public void testAdd() {
-        assertEquals(30, SimpleCalculator.add(20, 10));
+        assertEquals(50, SimpleCalculator.add(20, 10));
     }
 
     @Test
@@ -40,4 +40,5 @@ public class SimpleCalculatorTest {
     public void testZero() {
         assertEquals(0, SimpleCalculator.add(0, 0));
     }
+
 }
